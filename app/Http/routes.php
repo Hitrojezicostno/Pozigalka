@@ -23,8 +23,10 @@ $api->version('v1', function ($api) {
 		$api->get('/articles', 'ArtikelController@lista');
 		$api->get('/articles/{artikelID}', 'ArtikelController@read');
 		$api->post('/articles', 'ArtikelController@create');
-		$api->get('/categoies', 'KategorijaController@listk');
-		$api->get('/categoies/{categoryID}', 'KategorijaController@read');
-		$api->post('/categoies', 'KategorijaController@create');
+		$api->get('/categories', 'KategorijaController@listk');
+		$api->get('/categories/{categoryID}', 'KategorijaController@read');
+		$api->post('/categories', 'KategorijaController@create');
+		$api->get('/companies', 'PodjetjeController@listp');
+		$api->post('/companies', 'PodjetjeController@create');
 	});
 });

@@ -5,14 +5,30 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Artikel;
 
-class KategorijaController extends BaseController {
-	public function listk() {
+class ArtikelController extends BaseController {
+	public function lista() {
 		$artikli = Artikel::all();
 
 		return $this->response->array($artikli->toArray());
 	}
 
 	public function create (Request $request) {
+
+		// $this->validate($request, [
+		// 	'naziv'=>'required|max:50',
+		// 	'kategorija'=>'required',
+		// 	'merska_enota'=>'required',
+		// 	'sifra'=>'required',
+		// 	'cena_brez_ddv'=>'required',
+		// 	'cena'=>'required',
+		// 	'vprasaj_za_ceno'=>'required',
+		// 	'vprasaj_za_kolicino'=>'required',
+		// 	'za_prodajo'=>'required',
+		// ]);
+
+		// if(count($errors) > 0) {
+		// 	return $errors;
+		// }
 		//return $request;
 		$artikel = new Artikel();
 
@@ -27,8 +43,12 @@ class KategorijaController extends BaseController {
 		$artikel->vprasaj_za_kolicino = $request->askForQuantity;
 		$artikel->za_prodajo = $request->forSale;
 
-		$artikel->save();
-
+		try {
+			$artikel->save();
+		} catch (Exception $e) {
+			return $e;
+		}
+		
 		return $artikel;
 	}
 }
