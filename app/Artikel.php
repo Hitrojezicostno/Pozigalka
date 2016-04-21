@@ -42,9 +42,13 @@ class Artikel extends Model {
     */
     protected $za_prodajo;
     /**
-    * @var String
+    * @var Integer
     */
-    protected $kategorija_id;
+    protected $kategorija;
 
     protected $table = 'artikel';
+
+    public function kategorija () {
+        return $this->belongsTo('App\Kategorija');
+    }
 }

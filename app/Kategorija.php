@@ -23,4 +23,12 @@ class Kategorija extends Model {
     protected $je_krovna;
 	
 	protected $table = 'kategorija';
+
+	public function izdelki () {
+        return $this->hasMany('App\Artikel', 'kategorija');
+    }
+
+    public function kategorije () {
+    	return $this->belongsTo('App\Podjetje');
+    }
 }

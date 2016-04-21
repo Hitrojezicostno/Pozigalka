@@ -48,4 +48,8 @@ class Podjetje extends Model
     protected $aktiviran;
 
     protected $table = 'podjetje';
+
+    public function kategorije () {
+        return $this->hasMany('App\Kategorija', 'podjetjeID');
+    }
 }
