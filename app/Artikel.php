@@ -44,7 +44,7 @@ class Artikel extends Model {
     /**
     * @var String
     */
-    protected $podjetjeID;
+    protected $kategorija_id;
 
     protected $table = 'artikel';
 }

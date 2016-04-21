@@ -4,12 +4,18 @@ namespace App\Api\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Artikel;
+use App\kategorija;
 
 class ArtikelController extends BaseController {
 	public function lista() {
 		$artikli = Artikel::all();
 
 		return $this->response->array($artikli->toArray());
+	}
+
+	public function listByCategory () {
+		$artikel = new Artikel();
+		return $this->hasMany('App\Kategorija');
 	}
 
 	public function create (Request $request) {
