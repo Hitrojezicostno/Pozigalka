@@ -29,6 +29,18 @@ class PodjetjeController extends BaseController {
 		$podjetje->eposta = $request->email;
 		$podjetje->aktiviran = false;
 
+		try {
+			$podjetje->save();
+		} catch (Exception $e) {
+			return $e;
+		}
+
+		createUser($podjetje->podjetjeID);
+	}
+
+
+	public function createUser ($id) {
+		return $id;
 
 		$uporabnik = new Uporabnik();
 
