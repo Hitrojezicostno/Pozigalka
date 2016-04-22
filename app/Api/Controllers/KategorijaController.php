@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Controllers;
 
+use Validator;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Kategorija;
@@ -13,6 +14,16 @@ class KategorijaController extends BaseController {
 	}
 
 	public function create (Request $request) {
+		$validator = Validator::make($request->all(), [
+			'company' => 'required',
+			'name' => 'required',
+			'is_root' => 'required',
+		]);
+
+		if ($validator->fails()) {
+			return $validator->messages();
+		}
+
 		$kategorija = new Kategorija();
 
 		$kategorija->podjetjeID = $request->company;
