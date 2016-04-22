@@ -22,7 +22,6 @@ class ArtikelController extends BaseController {
 	}
 
 	public function create (Request $request) {
-
 		$validator = Validator::make($request->all(), [
 			'name' => 'required',
 			'category' => 'required',
