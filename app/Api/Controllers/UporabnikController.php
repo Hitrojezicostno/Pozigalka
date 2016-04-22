@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Controllers;
 
+use Validator;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Uporabnik;
@@ -11,6 +12,19 @@ class UporabnikController extends BaseController {
 	}
 
 	public function create (Request $request) {
+		$validator = Validator::make($request->all(), [
+			'name' => 'required',
+			'surname' => 'required',
+			'tax_number' => 'required',
+			'username' => 'required',
+			'password' => 'required',
+			'type' => 'required',
+		]);
+
+		if ($validator->fails()) {
+			return $validator->messages();
+		}
+
 		$uporabnik = new Uporabnik();
 
 		$uporabnik->ime = $request->name;
