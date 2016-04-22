@@ -12,7 +12,7 @@ class Kategorija extends Model {
 	/**
 	* @var Integer
 	*/
-    protected $podjetje;
+    protected $podjetjeID;
 	/**
 	* @var String
 	*/
@@ -29,6 +29,6 @@ class Kategorija extends Model {
     }
 
     public function kategorije () {
-    	return $this->belongsTo('App\Podjetje');
+    	return $this->belongsTo('App\Podjetje', 'podjetjeID');
     }
 }

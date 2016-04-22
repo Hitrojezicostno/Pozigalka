@@ -21,7 +21,7 @@ $api->version('v1', function ($api) {
 	$api->group(['namespace' => 'App\Api\Controllers'], function ($api) {
 		$api->get('/home', 'HomeController@index');
 		$api->get('/articles', 'ArtikelController@lista');
-		$api->get('/articles1', 'ArtikelController@listByCategory');
+		$api->get('/articles1', 'ArtikelController@companyCategories');
 		$api->get('/articles/{artikelID}', 'ArtikelController@read');
 		$api->post('/articles', 'ArtikelController@create');
 		$api->get('/categories', 'KategorijaController@listk');

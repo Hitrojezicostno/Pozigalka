@@ -50,6 +50,10 @@ class Podjetje extends Model
     protected $table = 'podjetje';
 
     public function kategorije () {
-        return $this->hasMany('App\Kategorija', 'podjetjeID');
+        return $this->hasManyThrough('App\Artikel', 'App\Kategorija', 'podjetjeID', 'kategorija')->where('kategorija.podjetjeIdD', 1);
+    }
+
+    public function artilki () {
+    	return $this->join('kategorija', 'podjetjeID', '=', 'kategorija.podjetjeID')->get();
     }
 }

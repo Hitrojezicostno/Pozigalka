@@ -5,6 +5,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Artikel;
 use App\Kategorija;
+use App\Podjetje;
 
 class ArtikelController extends BaseController {
 	public function lista() {
@@ -13,7 +14,14 @@ class ArtikelController extends BaseController {
 		return $this->response->array($artikli->toArray());
 	}
 
-	public function listByCategory () {
+	public function companyCategories () {
+		$podjetje = new Podjetje();
+		$kategorije = $podjetje->artikli;
+		return $kategorije;
+		return $this->response->array($kategorije->toArray());
+	}
+
+	public function listByCategoryID ($id) {
 		$kategorija = new Kategorija();
 		$artikli = $kategorija->izdelki;
 		return $artikli;
