@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Controllers;
 
+use Validator;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Podjetje;
@@ -14,6 +15,20 @@ class PodjetjeController extends BaseController {
 	}
 
 	public function create (Request $request) {
+		$validator = Validator::make($request->all(), [
+			'name' => 'required',
+			'address' => 'required',
+			'place' => 'required',
+			'postCode' => 'required',
+			'registration_number' => 'required',
+			'tax_number' => 'required',
+			'vat_payer' => 'required',
+			'email' => 'required',
+		]);
+
+		if ($validator->fails()) {
+			return $validator->messages();
+		}
 
 		//return $request;
 
@@ -43,7 +58,7 @@ class PodjetjeController extends BaseController {
 		
 		try {
 			$podjetje->save();
-			$uporabnik->save();
+			//$uporabnik->save();
 		} catch (Exception $e) {
 			return $e;
 		}
