@@ -1,6 +1,7 @@
 <?php
 namespace App\Api\Controllers;
 
+use Validator;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Artikel;
@@ -14,14 +15,7 @@ class ArtikelController extends BaseController {
 		return $this->response->array($artikli->toArray());
 	}
 
-	public function companyCategories () {
-		$podjetje = new Podjetje();
-		$kategorije = $podjetje->artikli;
-		return $kategorije;
-		return $this->response->array($kategorije->toArray());
-	}
-
-	public function listByCategoryID ($id) {
+	public function listByCategory () {
 		$kategorija = new Kategorija();
 		$artikli = $kategorija->izdelki;
 		return $artikli;
@@ -29,22 +23,23 @@ class ArtikelController extends BaseController {
 
 	public function create (Request $request) {
 
-		// $this->validate($request, [
-		// 	'naziv'=>'required|max:50',
-		// 	'kategorija'=>'required',
-		// 	'merska_enota'=>'required',
-		// 	'sifra'=>'required',
-		// 	'cena_brez_ddv'=>'required',
-		// 	'cena'=>'required',
-		// 	'vprasaj_za_ceno'=>'required',
-		// 	'vprasaj_za_kolicino'=>'required',
-		// 	'za_prodajo'=>'required',
-		// ]);
+		$validator = Validator::make($request->all(), [
+			'name' => 'required',
+			'category' => 'required',
+			'unit' => 'required',
+			'code' => 'required',
+			'priceTaxless' => 'required',
+			'price' => 'required',
+			'taxrate' => 'required',
+			'askForPrice' => 'required',
+			'askForQuantity' => 'required',
+			'forSale' => 'required',
+		]);
 
-		// if(count($errors) > 0) {
-		// 	return $errors;
-		// }
-		//return $request;
+		if ($validator->fails()) {
+			return $validator->messages();
+		}
+
 		$artikel = new Artikel();
 
 		$artikel->naziv = $request->name;
