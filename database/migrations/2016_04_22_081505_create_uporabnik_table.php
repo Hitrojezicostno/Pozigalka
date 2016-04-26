@@ -20,7 +20,7 @@ class CreateUporabnikTable extends Migration
             $table->integer('davcna_stevilka');
             $table->string('uporabnisko_ime');
             $table->string('geslo');
-            $table->integer('tip_uporabninka');
+            $table->integer('tip_uporabnika');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateUporabnikTable extends Migration
      */
     public function down()
     {
-        Schema::drop('uporabnik');
+        //
     }
 }

@@ -32,9 +32,13 @@ $api->version('v1', function ($api) {
 
 		$api->get('/companies', 'PodjetjeController@listp');
 		$api->post('/companies', 'PodjetjeController@create');
+		$api->get('/companies/licence/{podjetje}', 'PodjetjeController@licence');
 
 		$api->get('/users', 'UporabnikController@listu');
 		$api->post('/users', 'UporabnikController@create');
+
+		$api->get('/licence/{podjetjeID}', 'LicencaController@read');
+		$api->post('/licence', 'LicencaController@create');
 
 	});
 });
