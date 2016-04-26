@@ -6,6 +6,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Podjetje;
 use App\Uporabnik;
+use App\Licenca;
 
 class PodjetjeController extends BaseController {
 	public function listp() {
@@ -78,5 +79,15 @@ class PodjetjeController extends BaseController {
 
 		return [$podjetje, $uporabnik];
 		
+	}
+
+	public function licence ($kljuc) {
+		try {
+			$licenca = Licenca::where('kljuc', $kljuc)->firstOrFail(['licencaID', 'podjetje', 'kljuc', 'tip']);
+		} catch (ModelNotFoundException  $ex) {
+			return $this->response->errorBadRequest();
+		}
+		
+		return $licenca;
 	}
 }
